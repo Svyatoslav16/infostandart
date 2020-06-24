@@ -1,0 +1,675 @@
+:root {
+    --main-color: rgb(28, 116, 151);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button, 
+button:active, 
+button:focus,
+input,
+input:focus {
+    outline: none;
+}
+
+body {
+    position: relative;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#layer {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: rgba(0,0,0,.5);
+    z-index: -1;
+}
+
+#layer.active {
+    opacity: 1;
+    z-index: 3;
+}
+
+header {
+    display: grid;
+    align-items: center;
+    background: var(--main-color);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 5px 10px;
+}
+
+.header__title {
+    color: #fff;
+    font-size: 22px;
+    text-align: center;
+}
+
+.header__add-temperature-data-icon {
+    transition: .3s;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    fill: #fff;
+}
+
+.header__add-temperature-data-icon.active {
+    transform: rotate3d(0,0,1,45deg);
+}
+
+.header__logo img {
+    width: 50px;
+    border-radius: 50%;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+main {
+    /* display: grid; */
+    background: #f2f2f2;
+    padding-top: 20px;
+
+}
+
+/* Убирает стрелки из поля с типом number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+.btn {
+    background: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 0;
+    margin: 10px 0;
+    border: 1px solid rgba(27,31,35,.2);
+    border-radius: 12px;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+    min-width: 270px;
+}
+
+.weather-form {
+    height: 0;
+    left: calc(50% - 156.3px);
+    overflow: hidden;
+    transition: .4s;
+    opacity: 0;
+    background: #fff;
+    padding: 10px 10px 0 10px;
+    border-radius: 5px;
+}
+
+.weather-form.active {
+    height: auto;
+    overflow: visible;
+    z-index: 4;
+    opacity: 1;
+}
+
+.weather-form__title {
+    text-align: center;
+    font-size: 20px;
+    color: gray;
+    margin-bottom: 10px;
+    /* font-weight: ; */
+}
+
+.weather-form__datetime-wrap {
+    width: 100%;
+    /* height: 26px; */
+    /* padding: 15px 23px; */
+    margin-bottom: 10px;
+    background: #71c2c2;
+    border-radius: 8px;
+}
+
+.weather-form__datetime-wrap.empty {
+    border: 1px solid rgb(224, 113, 113);
+}
+
+.weather-form__datetime-wrap input {
+    cursor: pointer;
+    padding: 16.5px 0;
+    color: rgba(0, 0, 0, .7);
+    transition: .3s;
+    background: transparent;
+    border: none;
+    color: #f5f6fa;
+    font-size: 16px;
+}
+
+.weather-form__datetime-wrap input[name="weatherDate"] {
+    margin-right: 0;
+    padding-left: 15px;
+}
+
+.weather-form__datetime-wrap input[name="weatherTime"] {
+    margin-left: 0;
+}
+
+.weather-form .add-weather-data-wrap {
+    text-align: center;
+}
+
+.weather-diagram-wrap {
+    border: 1px solid black;
+    width: calc(100% - 30px);
+    height: 100%;
+    margin: 0 20px;
+}
+
+.weather-table-wrap {
+    text-align: left;
+    /* background: #e0e0e0; */
+    padding: 5px 0;
+    margin: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 4px 10px 18px -7px rgba(0,0,0,0.75);
+}
+
+.weather-table {
+    border-spacing: 0;
+}
+
+.weather-table caption {
+    font-size: 22px;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.weather-table tbody tr > td {
+    padding: 10px 8px 10px 0px;
+    color: rgba(0, 0, 0, .7);
+}
+
+.weather-table tbody tr > td:not(:first-child) {
+    padding-left: 8px;
+}
+
+.weather-table tbody tr > td {
+    border-top: 1px solid rgba(128, 128, 128, 0.637);
+}
+
+.weather-table tbody tr:hover {
+    background: rgba(0,0,0,.1);
+}
+
+.weather-table tbody .empty-data-wrap:hover {
+    background: initial;
+}
+
+.weather-table thead .filtration {
+    position: relative;
+}
+
+.filtration__title {
+    font-weight: normal;
+    font-size: 18px;
+    padding: 5px 0 5px 10px;
+    text-align: left;
+    color: rgba(0, 0, 0, .9);
+    border: 1px solid gray;
+    cursor: pointer;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.filtration__title:hover {
+    border: 1px solid rgb(78, 78, 78);
+}
+
+.filtration__title:hover svg {
+    fill: black;
+}
+
+.filtration__title.active {
+    border-color: var(--main-color);
+}
+
+.filtration__title .filter-icon {
+    width: 18px;
+    height: 18px;
+    transform: rotate(90deg);
+    margin: 0 0 -3px 10px;
+}
+
+.filtration__title .filter-icon.active {
+    fill: var(--main-color);
+}
+
+.filtration__settings { /*В Firefox элемент уходит вверх, нужно менять bottom на top: 50px и left: 0, хз почему*/
+    position: absolute;
+    bottom: 10px; 
+    left: 100px;
+    /* top: 50px;
+    left: 0; */
+    height: 0;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid gray;
+    border-radius: 5px;
+    opacity: 0;
+    transition: .3s;
+    padding: 15px;
+    font-weight: normal;
+    pointer-events: none;
+}
+
+.filtration__settings.active {
+    height: initial;
+    opacity: 1;
+    overflow: visible;
+    pointer-events: initial;
+}
+
+.filtration__settings > div:not(:first-child) {
+    margin-top: 10px;
+}
+
+.filtration__settings > div:not(:last-child) {
+    display: grid;
+    align-items: center;
+    text-align: left;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.671);
+}
+
+.filtration__settings__control-button {
+    display: grid;
+    grid-template-columns: 1fr max-content max-content;
+}
+
+.filtration__settings__control-button button {
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.filtration__settings__control-button .clear-all-filter-btn-wrap {
+    text-align: left;
+}
+
+.filtration__settings__control-button .clear-all-filter-btn {
+    color: #c36a6d;
+}
+
+.filtration__settings__control-button .cancel-btn {
+    color: gray;
+}
+
+.filtration__settings__control-button .apply-btn {
+    color: var(--main-color);
+    margin-left: 15px;
+}
+
+.filtration__settings.active::before,
+.filtration__settings.active::after {
+    content: ''; 
+    position: absolute;
+    left: 95px; top: -20px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid gray;
+}
+
+.filtration__settings.active::after {
+    border-bottom: 10px solid white;
+    top: -19px; 
+}
+
+.filtration__settings__datetime-range {
+    grid-template-columns: 200px max-content max-content;
+}
+
+.filtration__settings__datetime-range > div {
+    display: inline-block;
+}
+
+.filtration__settings__datetime-range .input-wrap:last-child {
+    margin-left: 10px;
+}
+
+.filtration__settings__datetime-range .input-wrap label {
+    margin-right: 5px;
+}
+
+.filtration__settings__datetime-range .input-wrap input {
+    cursor: pointer;
+    border: none;
+}
+
+.filtration__settings__datetime-range .input-wrap input:nth-child(2) {
+    padding: 5px 0 5px 5px;
+    border: 1px solid gray;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+}
+
+.filtration__settings__datetime-range .input-wrap input:nth-child(3) {
+    padding: 5px 5px 5px 5px;
+    border: 1px solid gray;
+    border-radius: 0 5px 5px 0;
+    border-left: none;
+}
+
+.filtration__settings__range-filter {
+    grid-template-columns: 200px max-content max-content;
+}
+
+.filtration__settings__range-filter .input-wrap {
+    display: inline-block;
+}
+
+.filtration__settings__range-filter .input-wrap:last-child {
+    margin-left: 10px;
+}
+
+.filtration__settings__range-filter .input-wrap label {
+    margin-right: 5px;
+}
+
+.filtration__settings__range-filter .input-wrap input {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px 5px 5px 5px;
+    background: transparent;
+    text-align: center;
+}
+
+.filtration__settings__temperature .input-wrap input,
+.filtration__settings__moisture .input-wrap input,
+.filtration__settings__wind-speed .input-wrap input {
+    width: 35px;
+}
+
+.filtration__settings__temperature .input-wrap input:invalid,
+.filtration__settings__moisture .input-wrap input:invalid,
+.filtration__settings__wind-speed .input-wrap input:invalid,
+.filtration__settings__rainfall .input-wrap input:invalid {
+    border: 1px solid rgb(224, 113, 113);
+}
+
+.filtration__settings__rainfall .input-wrap input {
+    width: 50px;
+}
+
+.filtration__settings__checkbox-filter .checkbox-list {
+    display: grid;
+}
+
+.filtration__settings__checkbox-filter .checkbox-list .checkbox-wrap {
+    margin-bottom: 5px;
+}
+
+.filtration__settings__checkbox-filter .checkbox-list .checkbox-wrap input[type="checkbox"] {
+    display: none;
+}
+
+.filtration__settings__checkbox-filter .checkbox-list .checkbox-wrap label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 25px;
+	margin-right: 15px;
+}
+
+.filtration__settings__checkbox-filter .checkbox-list .checkbox-wrap label::before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+    background: #fff;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.filtration__settings__checkbox-filter .checkbox-list .checkbox-wrap input[type="checkbox"]:checked + label::before {
+	content: "\2713";
+	font-size: 15px;
+    color: #fff;
+    background: var(--main-color);
+    border: 1px solid var(--main-color);
+	text-align: center;
+	line-height: 15px;
+}
+
+.filtration__settings__cloudiness,
+.filtration__settings__wind-direction {
+    grid-template-columns: 200px max-content
+}
+
+.filtration__settings__cloudiness .checkbox-list {
+    grid-template-columns: repeat(2, minmax(max-content, .5fr));
+}
+
+.filtration__settings__wind-direction .checkbox-list {
+    grid-template-columns: repeat(2, minmax(max-content, .5fr));
+}
+
+.filtration__settings__wind-direction .checkbox-list .checkbox-wrap:nth-child(odd) {
+    margin-right: 15px;
+}
+
+.weather-table thead .sort th {
+    font-weight: normal;
+    font-size: 18px;
+    padding: 10px 25px 20px 8px;
+    text-align: left;
+    color: rgba(0, 0, 0, .9);
+    cursor: pointer;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+.weather-table thead .sort th:hover {
+    color: rgba(0, 0, 0, .5); 
+}
+
+.weather-table thead .sort th:first-child {
+    padding-left: 0;
+}
+
+.weather-table thead .sort th:last-child {
+    padding-right: 0;
+}
+
+.weather-table thead .sort .sort-icon {
+    width: 10px;
+    height: 11px;
+}
+
+.weather-table .empty-data {
+    text-align: center;
+}
+
+.weather-table .cloud-icon {
+    width: 200px;
+    height: 150px;
+    fill: rgb(28, 116, 151);
+}
+
+.weather-table .empty-data span {
+    display: block;
+    margin-top: -20px;
+}
+
+.pointer-wrapper {
+    position: absolute;
+    display: grid;
+    justify-items: right;
+}
+
+.pointer-wrapper svg {
+    transform: rotate3d(0,0,1,108deg);
+    fill: #fff;
+    z-index: 5;
+    width: 50px;
+}
+
+.pointer-wrapper div {
+    padding: 5px;
+    background: #fff;
+    color: gray;
+    z-index: 5;
+    border-radius: 5px;
+}
+
+@media (min-width: 800px) {
+    header {
+        grid-template-columns: 50px 1fr 50px;
+    }
+
+    main {
+        min-height: calc(100vh - 80px);
+    }
+
+    .weather-table {
+        margin: 10px auto;
+    }
+
+    .btn {
+        padding: 7px 0;
+    }
+
+    .btn:hover {
+        color: #fff;
+        outline: none;
+    }
+
+    .btn::before {
+        transform: scaleX(0);
+        left: 50%;
+    }
+
+    .btn::after {
+        left: 50%;
+        transform: scaleX(0);
+    }
+
+    .btn::before,
+    .btn::after {
+        content: '';
+        width: 50%;
+        background: linear-gradient(45deg, #71c2c2,#7cd3d3);
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transition: transform 0.5s;
+        transform-origin: 0 0;
+        transition-timing-function: ease-out;
+        outline: none;
+    }
+
+    .btn::before {
+        border-radius: 0 12px 12px 0;
+    }
+
+    .btn:hover::before{
+        transform: scaleX(1);
+        z-index: -1;
+    }
+
+    .btn::after {
+        border-radius: 0 12px 12px 0;
+    }
+
+    .btn:hover::after{
+        transform: scaleX(-1);
+        z-index: -1;
+    }
+
+    .select-box .option:hover {
+        background: #64aaaa;
+    }
+    
+    .pointer-wrapper {
+        right: 45px;
+        top: 70px;
+    }
+}
+
+@media (max-width: 799px) {
+    header {
+        grid-template-columns: 30px 1fr 30px;
+    }
+
+    .header__logo img {
+        width: 30px;
+    }
+
+    .header__add-temperature-data-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    main {
+        min-height: calc(100vh - 60px);
+    }
+
+    .weather-table thead {
+        display: none;
+    }
+
+    .btn {
+        background: linear-gradient(45deg, #71c2c2,#7cd3d3);
+        border: 1px solid #f2f2f2;
+        color: #f5f5f5;
+        padding: 8px 0;
+    }
+
+    .pointer-wrapper {
+        right: 19px;
+        top: 41px;
+        text-align: right;
+    }
+
+    .pointer-wrapper div {
+        width: min-content;
+    }
+}
+
+@media (min-height: 670px) {
+    .weather-form {
+        position: fixed;
+    }
+}
+
+@media (max-height: 669px) {
+    .weather-form {
+        position: sticky;
+        top: 45px;
+        margin: 0 5px 30px 5px;
+    }
+}

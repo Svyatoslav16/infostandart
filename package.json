@@ -1,0 +1,11 @@
+{
+  "name": "infostandart_task",
+  "version": "1.0.0",
+  "description": "Одностраничное приложение о погоде",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Святослав Марюха",
+  "license": "ISC"
+}

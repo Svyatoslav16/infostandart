@@ -1,0 +1,91 @@
+/* Кастомный список */
+.select-box {
+    display: grid;
+    width: 100%;
+    position: relative;
+}
+
+.select-box .options-container {
+    position: absolute;
+    top: 55px;
+    background: #71c2c2;
+    color: #f5f6fa;
+    max-height: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.selected {
+    background: #71c2c2;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    color: #f5f6fa;
+    position: relative;
+}
+
+.selected.empty {
+    border: 1px solid rgb(224, 113, 113);
+}
+
+.selected::after {
+    content: "";
+    background: url("../../images/arrow-down.svg") no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 26px;
+    width: 30px;
+    right: 10px;
+    top: calc(50% - 13px);
+    transition: all 0.4s;
+}
+
+.select-box .options-container.active {
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+    z-index: 2;
+}
+
+.select-box .options-container.active + .selected::after {
+    transform: rotateX(180deg);
+    top: calc(50% - 9px);
+}
+
+.select-box .options-container::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+    background: #525861;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .option,
+.selected {
+    cursor: pointer;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+.selected,
+.select-box label {
+    padding: 15px 23px;
+}
+
+.select-box label {
+    cursor: pointer;
+    display: block;
+}
+
+.select-box .option .radio {
+    display: none;
+}

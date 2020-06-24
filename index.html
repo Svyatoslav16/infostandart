@@ -1,0 +1,312 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/customInput.css">
+    <link rel="stylesheet" href="./styles/customSelect.css">
+    <link rel="icon" href="./images/weather-icon.png" type="image/png">
+    <script src="./js/index.js" defer></script>
+    <script src="./js/customSelect.js" defer></script>
+    <script src="./js/checkFormData.js" defer></script>
+    <script src="./js/weatherDataSorting.js" defer></script>
+    <script src="./js/weatherDataFiltering.js" defer></script>
+    <title>Погода</title>
+</head>
+<body>
+    <header>
+        <a href="/" class="header__logo"><img src="./images/weather-icon.png" alt="Логотип сайта"></a>
+        <span class="header__title">Погода</span>
+        <svg class="icon header__add-temperature-data-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <path d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216 v216c0,11.046,8.954,20,20,20s20-8.954,20-20V276h216c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z"/>
+        </svg>
+    </header>
+    <main>
+        <div class="weather-form">
+            <h3 class="weather-form__title">Добавление данных о погоде</h3>
+            <div class="weather-form__datetime-wrap">
+                <!-- Если поставить не в ряд, то между ними образуется пробел -->
+                <input type="date" name="weatherDate" autocomplete="off"/><input type="time" name="weatherTime" autocomplete="off"/>
+            </div>
+            <div class="cloudiness">
+                <div class="select-box">
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" class="radio" name="cloudiness" value="Переменная"/>
+                            <label>Переменная</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="cloudiness" value="Без осадков"/>
+                            <label>Без осадков</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="cloudiness" value="Пасмурная"/>
+                            <label>Пасмурная</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="cloudiness" value="Облачная"/>
+                            <label>Облачная</label>
+                        </div>
+                    </div>
+                    <div class="selected">
+                        Облачность
+                    </div>
+                </div>
+            </div>
+            <div class="wind-direction">
+                <div class="select-box">
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Северное"/>
+                            <label>Северное</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Северо-восточное"/>
+                            <label>Северо-восточное</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Восточное"/>
+                            <label>Восточное</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Юго-восточное"/>
+                            <label>Юго-восточное</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Южное"/>
+                            <label>Южное</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Юго-западное"/>
+                            <label>Юго-западное</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Западное"/>
+                            <label>Западное</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" class="radio" name="wind-direction" value="Северо-западное"/>
+                            <label>Северо-западное</label>
+                        </div>
+                    </div>
+                    <div class="selected">
+                        Направление ветра
+                    </div>
+                </div>
+            </div>
+            <div class="temperature material-design-input-wrap">
+                <input type="text" class="material-design-input" name="temperature" autocomplete="off"/>
+                <label for="temperature" class="temperature-label material-design-label-for-input">
+                    <span class="content-temperature">Температура (&#176;C)</span>
+                </label>
+                <object type="image/svg+xml" data="./images/cross.svg" class="cross-icon"></object>
+                <object type="image/svg+xml" data="./images/correct.svg" class="correct-icon"></object>
+            </div>
+            <div class="moisture material-design-input-wrap">
+                <input type="text" class="material-design-input" name="moisture" autocomplete="off"/>
+                <label for="moisture" class="moisture-label material-design-label-for-input">
+                    <span class="content-moisture">Влажность (%)</span>
+                </label>
+                <object type="image/svg+xml" data="./images/cross.svg" class="cross-icon"></object>
+                <object type="image/svg+xml" data="./images/correct.svg" class="correct-icon"></object>
+            </div>
+            <div class="wind-speed material-design-input-wrap">
+                <input type="text" class="material-design-input" name="wind-speed" autocomplete="off"/>
+                <label for="wind-speed" class="wind-speed-label material-design-label-for-input">
+                    <span class="content-wind-speed">Скорость ветра (м/с)</span>
+                </label>
+                <object type="image/svg+xml" data="./images/cross.svg" class="cross-icon"></object>
+                <object type="image/svg+xml" data="./images/correct.svg" class="correct-icon"></object>
+            </div>
+            <div class="rainfall material-design-input-wrap">
+                <input type="text" class="material-design-input" name="rainfall" autocomplete="off"/>
+                <label for="rainfall" class="rainfall-label material-design-label-for-input">
+                    <span class="content-rainfall">Количество осадков (мм/г)</span>
+                </label>
+                <object type="image/svg+xml" data="./images/cross.svg" class="cross-icon"></object>
+                <object type="image/svg+xml" data="./images/correct.svg" class="correct-icon"></object>
+            </div>
+            <div class="add-weather-data-wrap">
+                <button class="btn add-weather-data-btn">Добавить</button>
+            </div>
+        </div>
+        <div class="weather-table-wrap">
+            <table class="weather-table">
+                <caption>Информация о погоде</caption>
+                <thead>
+                    <tr class="filtration">
+                        <th class="filtration__title">Фильтры
+                            <svg class="filter-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" xml:space="preserve">
+                                <path d="M860,437.2c-71.7,0-130-58.3-130-129.9c0-71.7,58.3-130,130-130c71.7,0,130,58.3,130,130C990,378.9,931.7,437.2,860,437.2z M860,228.6c-43.4,0-78.7,35.3-78.7,78.7c0,43.3,35.3,78.6,78.7,78.6c43.4,0,78.7-35.3,78.7-78.6C938.7,263.9,903.4,228.6,860,228.6z M832.7,155.7V79.1c0-14.2,11.5-25.7,25.7-25.7c14.2,0,25.7,11.5,25.7,25.7v76.4c-8-1.3-16-2.5-24.3-2.5C850.5,153,841.5,154.2,832.7,155.7z M499.2,822.8c-71.7,0-130-58.3-130-130c0-71.7,58.3-130,130-130c71.7,0,130,58.3,130,130C629.1,764.5,570.8,822.8,499.2,822.8z M499.2,614.1c-43.4,0-78.7,35.3-78.7,78.7c0,43.4,35.3,78.7,78.7,78.7c43.4,0,78.7-35.3,78.7-78.7C577.8,649.4,542.5,614.1,499.2,614.1z M473.5,540.3V79.1c0-14.2,11.5-25.7,25.7-25.7c14.2,0,25.7,11.5,25.7,25.7V540c-8-1.3-16-2.5-24.3-2.5C491.3,537.6,482.3,538.7,473.5,540.3z M140,565.3c-71.7,0-130-58.3-130-130c0-71.7,58.3-130,130-130c71.7,0,129.9,58.3,129.9,130C269.9,507,211.7,565.3,140,565.3z M140,356.7c-43.4,0-78.7,35.3-78.7,78.7c0,43.4,35.3,78.7,78.7,78.7c43.3,0,78.6-35.3,78.6-78.7C218.6,392,183.3,356.7,140,356.7z M114.3,286.2V79.1c0-14.2,11.5-25.7,25.7-25.7c14.2,0,25.7,11.5,25.7,25.7v206.8c-8-1.3-16-2.5-24.3-2.5C132.1,283.4,123.1,284.6,114.3,286.2z M165.6,593.2v327.7c0,14.2-11.5,25.7-25.7,25.7c-14.2,0-25.7-11.5-25.7-25.7V593c8.8,1.6,17.8,2.7,27,2.7C149.6,595.7,157.7,594.5,165.6,593.2z M524.8,847.4v73.5c0,14.2-11.5,25.7-25.7,25.7c-14.2,0-25.7-11.5-25.7-25.7v-73.8c8.8,1.6,17.8,2.7,27,2.7C508.8,849.8,516.9,848.6,524.8,847.4z M884,462.8v458.1c0,14.2-11.5,25.7-25.7,25.7c-14.2,0-25.7-11.5-25.7-25.7V462.5c8.8,1.5,17.8,2.7,27,2.7C868.1,465.3,876.1,464,884,462.8z"/>
+                            </svg>
+                        </th>
+                        <th class="filtration__settings">
+                            <div class="filtration__settings__datetime-range">
+                                <div class="datetime-range__title">Дата и время</div>
+                                <div class="input-wrap">
+                                    <label>c</label>
+                                    <input type="date" id="" autocomplete="off"/><input type="time" autocomplete="off"/>
+                                </div>
+                                <div class="input-wrap">
+                                    <label>по</label>
+                                    <input type="date" autocomplete="off"/><input type="time" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="filtration__settings__temperature filtration__settings__range-filter">
+                                <div class="temperature__title range-filter__title">Температура</div>
+                                <div class="input-wrap">
+                                    <label>c</label>
+                                    <input type="number" min="-70" max="70" value="-70" data-original-value = "-70"/>
+                                </div>
+                                <div class="input-wrap">
+                                    <label>по</label>
+                                    <input type="number" min="-70" max="70" value="70" data-original-value = "70"/>
+                                </div>
+                            </div>
+                            <div class="filtration__settings__moisture filtration__settings__range-filter">
+                                <div class="moisture__title range-filter__title">Влажность</div>
+                                <div class="input-wrap">
+                                    <label>c</label>
+                                    <input type="number" min="0" max="100" value="0" data-original-value = "0"/>
+                                </div>
+                                <div class="input-wrap">
+                                    <label>по</label>
+                                    <input type="number" min="0" max="100" value="100" data-original-value = "100"/>
+                                </div>
+                            </div>
+                            <div class="filtration__settings__cloudiness filtration__settings__checkbox-filter">
+                                <div class="cloudiness__title">Облачность</div>
+                                <div class="checkbox-list">
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="cloudinessFilter1" name="cloudinessFilter1" value="Переменная"/>
+                                        <label for="cloudinessFilter1">Переменная</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="cloudinessFilter2" name="cloudinessFilter2" value="Без осадков"/>
+                                        <label for="cloudinessFilter2">Без осадков</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="cloudinessFilter3" name="cloudinessFilter3" value="Пасмурная"/>
+                                        <label for="cloudinessFilter3">Пасмурная</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="cloudinessFilter4" name="cloudinessFilter4" value="Облачная"/>
+                                        <label for="cloudinessFilter4">Облачная</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filtration__settings__wind-direction filtration__settings__checkbox-filter">
+                                <div class="cloudiness__title">Направление ветра</div>
+                                <div class="checkbox-list">
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter1" name="windDirectionFilter1" value="Северное"/>
+                                        <label for="windDirectionFilter1">Северное</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter2" name="windDirectionFilter2" value="Северо-восточное"/>
+                                        <label for="windDirectionFilter2">Северо-восточное</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter3" name="windDirectionFilter3" value="Восточное"/>
+                                        <label for="windDirectionFilter3">Восточное</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter4" name="windDirectionFilter4" value="Юго-восточное"/>
+                                        <label for="windDirectionFilter4">Юго-восточное</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter5" name="windDirectionFilter5" value="Южное"/>
+                                        <label for="windDirectionFilter5">Южное</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter6" name="windDirectionFilter6" value="Юго-западное"/>
+                                        <label for="windDirectionFilter6">Юго-западное</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter7" name="windDirectionFilter7" value="Западное"/>
+                                        <label for="windDirectionFilter7">Западное</label>
+                                    </div>
+                                    <div class="checkbox-wrap">
+                                        <input type="checkbox" id="windDirectionFilter8" name="windDirectionFilter8" value="Северо-западное"/>
+                                        <label for="windDirectionFilter8">Северо-западное</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filtration__settings__wind-speed filtration__settings__range-filter">
+                                <div class="range-filter__title">Скорость ветра</div>
+                                <div class="input-wrap">
+                                    <label>c</label>
+                                    <input type="number" min="0" max="300" value="0" data-original-value = "0"/>
+                                </div>
+                                <div class="input-wrap">
+                                    <label>по</label>
+                                    <input type="number" min="0" max="300" value="300" data-original-value = "300"/>
+                                </div>
+                            </div>
+                            <div class="filtration__settings__rainfall filtration__settings__range-filter">
+                                <div class="range-filter__title">Количество осадков</div>
+                                <div class="input-wrap">
+                                    <label>c</label>
+                                    <input type="number" min="0" max="10000" value="0" data-original-value = "0"/>
+                                </div>
+                                <div class="input-wrap">
+                                    <label>по</label>
+                                    <input type="number" min="0" max="10000" value="10000" data-original-value = "10000"/>
+                                </div>
+                            </div>
+                            <div class="filtration__settings__control-button">
+                                <div class="btn-wrap clear-all-filter-btn-wrap">
+                                    <button class="clear-all-filter-btn">Убрать все фильтры</button>
+                                </div>
+                                <div class="btn-wrap cancel-btn-wrap">
+                                    <button class="cancel-btn">Отменить</button>
+                                </div>
+                                <div class="btn-wrap apply-btn-wrap">
+                                    <button class="apply-btn">Применить</button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr class="sort">
+                        <th data-property="datetime">Дата и время
+                            <svg class="sort-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.678 36.678" xml:space="preserve"><path d="M29.696,20.076c0.088,0.16,0.08,0.354-0.021,0.51L19.395,36.449c-0.091,0.139-0.241,0.224-0.407,0.229 c-0.004,0-0.008,0-0.015,0c-0.157,0-0.31-0.076-0.403-0.205L6.998,20.609c-0.11-0.15-0.127-0.354-0.041-0.521 c0.085-0.168,0.257-0.272,0.444-0.272h21.855C29.443,19.814,29.609,19.914,29.696,20.076z M7.401,16.865h21.855 c0.008,0,0.017,0,0.021,0c0.275,0,0.5-0.225,0.5-0.5c0-0.156-0.07-0.295-0.184-0.388L18.086,0.205 C17.989,0.072,17.821,0.002,17.668,0c-0.165,0.005-0.315,0.09-0.406,0.229L6.982,16.094c-0.101,0.152-0.105,0.35-0.021,0.512 C7.05,16.765,7.218,16.865,7.401,16.865z"/></svg>
+                        </th>
+                        <th data-property="temperature">Температура
+                            <svg class="sort-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.678 36.678" xml:space="preserve"><path d="M29.696,20.076c0.088,0.16,0.08,0.354-0.021,0.51L19.395,36.449c-0.091,0.139-0.241,0.224-0.407,0.229 c-0.004,0-0.008,0-0.015,0c-0.157,0-0.31-0.076-0.403-0.205L6.998,20.609c-0.11-0.15-0.127-0.354-0.041-0.521 c0.085-0.168,0.257-0.272,0.444-0.272h21.855C29.443,19.814,29.609,19.914,29.696,20.076z M7.401,16.865h21.855 c0.008,0,0.017,0,0.021,0c0.275,0,0.5-0.225,0.5-0.5c0-0.156-0.07-0.295-0.184-0.388L18.086,0.205 C17.989,0.072,17.821,0.002,17.668,0c-0.165,0.005-0.315,0.09-0.406,0.229L6.982,16.094c-0.101,0.152-0.105,0.35-0.021,0.512 C7.05,16.765,7.218,16.865,7.401,16.865z"/></svg>
+                        </th>
+                        <th data-property="moisture">Влажность
+                            <svg class="sort-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.678 36.678" xml:space="preserve"><path d="M29.696,20.076c0.088,0.16,0.08,0.354-0.021,0.51L19.395,36.449c-0.091,0.139-0.241,0.224-0.407,0.229 c-0.004,0-0.008,0-0.015,0c-0.157,0-0.31-0.076-0.403-0.205L6.998,20.609c-0.11-0.15-0.127-0.354-0.041-0.521 c0.085-0.168,0.257-0.272,0.444-0.272h21.855C29.443,19.814,29.609,19.914,29.696,20.076z M7.401,16.865h21.855 c0.008,0,0.017,0,0.021,0c0.275,0,0.5-0.225,0.5-0.5c0-0.156-0.07-0.295-0.184-0.388L18.086,0.205 C17.989,0.072,17.821,0.002,17.668,0c-0.165,0.005-0.315,0.09-0.406,0.229L6.982,16.094c-0.101,0.152-0.105,0.35-0.021,0.512 C7.05,16.765,7.218,16.865,7.401,16.865z"/></svg>
+                        </th>
+                        <th data-property="cloudiness">Облачность
+                            <svg class="sort-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.678 36.678" xml:space="preserve"><path d="M29.696,20.076c0.088,0.16,0.08,0.354-0.021,0.51L19.395,36.449c-0.091,0.139-0.241,0.224-0.407,0.229 c-0.004,0-0.008,0-0.015,0c-0.157,0-0.31-0.076-0.403-0.205L6.998,20.609c-0.11-0.15-0.127-0.354-0.041-0.521 c0.085-0.168,0.257-0.272,0.444-0.272h21.855C29.443,19.814,29.609,19.914,29.696,20.076z M7.401,16.865h21.855 c0.008,0,0.017,0,0.021,0c0.275,0,0.5-0.225,0.5-0.5c0-0.156-0.07-0.295-0.184-0.388L18.086,0.205 C17.989,0.072,17.821,0.002,17.668,0c-0.165,0.005-0.315,0.09-0.406,0.229L6.982,16.094c-0.101,0.152-0.105,0.35-0.021,0.512 C7.05,16.765,7.218,16.865,7.401,16.865z"/></svg>
+                        </th>
+                        <th data-property="windDirection">Направление ветра
+                            <svg class="sort-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.678 36.678" xml:space="preserve"><path d="M29.696,20.076c0.088,0.16,0.08,0.354-0.021,0.51L19.395,36.449c-0.091,0.139-0.241,0.224-0.407,0.229 c-0.004,0-0.008,0-0.015,0c-0.157,0-0.31-0.076-0.403-0.205L6.998,20.609c-0.11-0.15-0.127-0.354-0.041-0.521 c0.085-0.168,0.257-0.272,0.444-0.272h21.855C29.443,19.814,29.609,19.914,29.696,20.076z M7.401,16.865h21.855 c0.008,0,0.017,0,0.021,0c0.275,0,0.5-0.225,0.5-0.5c0-0.156-0.07-0.295-0.184-0.388L18.086,0.205 C17.989,0.072,17.821,0.002,17.668,0c-0.165,0.005-0.315,0.09-0.406,0.229L6.982,16.094c-0.101,0.152-0.105,0.35-0.021,0.512 C7.05,16.765,7.218,16.865,7.401,16.865z"/></svg>
+                        </th>
+                        <th data-property="windSpeed">Скорость ветра
+                            <svg class="sort-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.678 36.678" xml:space="preserve"><path d="M29.696,20.076c0.088,0.16,0.08,0.354-0.021,0.51L19.395,36.449c-0.091,0.139-0.241,0.224-0.407,0.229 c-0.004,0-0.008,0-0.015,0c-0.157,0-0.31-0.076-0.403-0.205L6.998,20.609c-0.11-0.15-0.127-0.354-0.041-0.521 c0.085-0.168,0.257-0.272,0.444-0.272h21.855C29.443,19.814,29.609,19.914,29.696,20.076z M7.401,16.865h21.855 c0.008,0,0.017,0,0.021,0c0.275,0,0.5-0.225,0.5-0.5c0-0.156-0.07-0.295-0.184-0.388L18.086,0.205 C17.989,0.072,17.821,0.002,17.668,0c-0.165,0.005-0.315,0.09-0.406,0.229L6.982,16.094c-0.101,0.152-0.105,0.35-0.021,0.512 C7.05,16.765,7.218,16.865,7.401,16.865z"/></svg>
+                        </th>
+                        <th data-property="rainfall">Количество осадков
+                            <svg class="sort-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.678 36.678" xml:space="preserve"><path d="M29.696,20.076c0.088,0.16,0.08,0.354-0.021,0.51L19.395,36.449c-0.091,0.139-0.241,0.224-0.407,0.229 c-0.004,0-0.008,0-0.015,0c-0.157,0-0.31-0.076-0.403-0.205L6.998,20.609c-0.11-0.15-0.127-0.354-0.041-0.521 c0.085-0.168,0.257-0.272,0.444-0.272h21.855C29.443,19.814,29.609,19.914,29.696,20.076z M7.401,16.865h21.855 c0.008,0,0.017,0,0.021,0c0.275,0,0.5-0.225,0.5-0.5c0-0.156-0.07-0.295-0.184-0.388L18.086,0.205 C17.989,0.072,17.821,0.002,17.668,0c-0.165,0.005-0.315,0.09-0.406,0.229L6.982,16.094c-0.101,0.152-0.105,0.35-0.021,0.512 C7.05,16.765,7.218,16.865,7.401,16.865z"/></svg>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="empty-data-wrap">
+                        <td colspan="7" class="empty-data">
+                            <svg class="cloud-icon" viewBox="-20 -129 638.67144 638" xmlns="http://www.w3.org/2000/svg"><path d="m478.90625 132.8125c-4.785156.003906-9.5625.292969-14.3125.863281-12.894531-41.988281-51.628906-70.683593-95.550781-70.773437-10.933594-.011719-21.789063 1.804687-32.121094 5.363281-25.578125-55.308594-86.195313-85.367187-145.699219-72.25-59.511718 13.121094-101.867187 65.875-101.824218 126.808594.003906 10.53125 1.316406 21.019531 3.890624 31.222656-56.695312 8.65625-97.203124 59.46875-92.988281 116.667969 4.207031 57.203125 51.71875 101.542968 109.070313 101.796875h369.535156c66.191406 0 119.847656-53.660157 119.847656-119.851563s-53.65625-119.847656-119.847656-119.847656zm0 219.722656h-369.535156c-49.238282.214844-89.472656-39.253906-90.207032-88.488281-.730468-49.234375 38.304688-89.878906 87.53125-91.132813 3.195313-.089843 6.152344-1.703124 7.957032-4.339843 1.8125-2.640625 2.246094-5.980469 1.171875-8.992188-19.824219-56.730469 9.664062-118.855469 66.152343-139.367187 56.484376-20.511719 118.964844 8.226562 140.15625 64.460937.96875 2.609375 2.976563 4.691407 5.546876 5.753907 2.574218 1.0625 5.46875 1.003906 7.992187-.160157 10.457031-4.863281 21.84375-7.382812 33.371094-7.394531 38 .070312 70.722656 26.835938 78.3125 64.070312 1.085937 5.414063 6.359375 8.914063 11.765625 7.820313 6.511718-1.304687 13.136718-1.96875 19.785156-1.976563 55.160156 0 99.875 44.71875 99.875 99.871094 0 55.160156-44.714844 99.875-99.875 99.875zm0 0"/></svg>
+                            <span>Нет данных о погоде</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="weather-diagram-wrap">
+            <canvas class="weather-diagram">
+
+            </canvas>
+        </div> -->
+        <div id="layer"></div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,110 @@
+.material-design-input-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+    padding-right: 25px;
+}
+
+.material-design-input-wrap.temperature {
+    margin-top: 10px;
+}
+
+.material-design-input {
+    width: calc(100% - 25px);
+    padding: 25px 0 8px 25px;
+    outline: none;
+    border: none;
+    font-size: 19px;
+    color: rgba(0,0,0,0.7);
+    z-index: 1;
+    background: none;
+}
+
+.material-design-input:invalid {
+    box-shadow: 0 0 0 #fff;
+}
+
+.material-design-label-for-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid rgba(99, 98, 98, 0.54);
+    border-radius: 5px 5px 0 0;
+    background: rgba(244, 242, 242, 0.96);
+    transition: .3s;
+}
+
+.material-design-label-for-input.empty {
+    border: 1px solid rgb(224, 113, 113);
+}
+
+.material-design-input:hover + .material-design-label-for-input {
+    background: rgba(226, 226, 226, 0.96);
+    border-bottom: 1px solid rgba(22, 22, 22, 0.54);
+}
+
+.material-design-label-for-input::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 100%;
+    width: calc(100% + 1px);
+    transform: translateX(-100%);
+}
+
+.material-design-label-for-input span {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    transition: .3s;
+    color: rgba(0,0,0,.54);
+    padding-left: 23px;
+    font-size: 16px;
+}
+
+.material-design-input:focus + .material-design-label-for-input span {
+    transform: translateY(-90%);
+    font-size: 14px;
+}
+
+.material-design-label-for-input.valid span {
+    transform: translateY(-90%);
+    font-size: 14px;
+    color: rgb(104, 219, 104);
+}
+
+.material-design-label-for-input.invalid span {
+    transform: translateY(-90%);
+    font-size: 14px;
+    color: rgb(224, 113, 113);
+}
+
+.material-design-label-for-input.valid::after {
+    border-bottom: 2px solid rgb(104, 219, 104);
+    transform: translateX(0);
+}
+
+.material-design-label-for-input.invalid::after {
+    border-bottom: 2px solid rgb(224, 113, 113);
+    transform: translateX(0);
+}
+
+.material-design-input-wrap .cross-icon,
+.material-design-input-wrap .correct-icon {
+    position: absolute;
+    top: 29.5px;
+    right: 23px;
+    width: 0; /* самый простой способ сделать иконку невидимой*/
+    height: 15px;
+    transition: width .2s ease-out;
+}
+
+.material-design-input-wrap .active {
+    width: 15px;
+}
