@@ -1,4 +1,4 @@
-const originalWeatherData = getWeatherData() || [];
+let originalWeatherData = getWeatherData() || [];
 let weatherData = originalWeatherData;
 
 const weatherForm = document.getElementsByClassName('weather-form')[0];
@@ -35,39 +35,7 @@ if(getCookie('wasOnTheSite') === null) {
   }, 2000);
 }
 
-for (let i = 0; i < weatherData.length; i++) {
-  let tr = document.createElement('tr');
-  let datetimeTD = document.createElement('td');
-    datetimeTD.innerText = weatherData[i].datetime;
-  let cloudinessTD = document.createElement('td');
-    cloudinessTD.innerText = weatherData[i].cloudiness;
-  let windDirectionTD = document.createElement('td');
-    windDirectionTD.innerText = weatherData[i].windDirection;
-  let temperatureTD = document.createElement('td');
-    temperatureTD.innerText = weatherData[i].temperature;
-  let moistureTD = document.createElement('td');
-    moistureTD.innerText = weatherData[i].moisture;
-  let windSpeedTD = document.createElement('td');
-    windSpeedTD.innerText = weatherData[i].windSpeed;
-  let rainfallTD = document.createElement('td');
-    rainfallTD.innerText = weatherData[i].rainfall;
-
-  tr.append(datetimeTD)
-  tr.append(temperatureTD);
-  tr.append(moistureTD);
-  tr.append(cloudinessTD);
-  tr.append(windDirectionTD);
-  tr.append(windSpeedTD);
-  tr.append(rainfallTD);
-
-  let emptyDataWrap = document.querySelector('.weather-table tbody .empty-data-wrap');
-
-  if( emptyDataWrap ) {
-    emptyDataWrap.remove();
-  }
-
-  document.querySelector('.weather-table tbody').append(tr);
-}
+renderWeatherData(weatherData); // Первоначальная запись данных из cookie в таблицу
 
 addTemperatureDataIcon.addEventListener('click', function() {
   if(document.getElementsByClassName('pointer-wrapper').length === 0) {
@@ -81,11 +49,28 @@ addTemperatureDataIcon.addEventListener('click', function() {
   }
 });
 
+document.getElementsByClassName('create-new-file-btn')[0].addEventListener('click', function() {
+  fetch('/fileCreation', {
+    method: 'POST',
+    body: JSON.stringify({
+      weatherData: originalWeatherData
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then(res => {
+    if(res.ok) {
+      alert('Файл с данными о погоде записан');
+    }
+  });
+});
+
 function setCookie(name,value,days = 1) {
-  var expires = "";
+  let expires = "";
 
   if (days) {
-    var date = new Date();
+    let date = new Date();
     date.setTime(date.getTime() + (days*24*60*60*1000));
     expires = "; expires=" + date.toUTCString();
   }
@@ -112,47 +97,17 @@ function getCookie(cookie_name) {
  * rainfall - количество осадков */
 function addWeatherData(datetime, temperature, moisture, cloudiness, windDirection, windSpeed, rainfall) {
   const newWeatherData = {datetime, temperature, moisture, cloudiness, windDirection, windSpeed, rainfall};
-  weatherData.push(newWeatherData);
 
-  // let tr = document.createElement('tr');
-  // let datetimeTD = document.createElement('td');
-  //   datetimeTD.innerText = datetime;
-  // let cloudinessTD = document.createElement('td');
-  //   cloudinessTD.innerText = cloudiness;
-  // let windDirectionTD = document.createElement('td');
-  //   windDirectionTD.innerText = windDirection;
-  // let temperatureTD = document.createElement('td');
-  //   temperatureTD.innerText = temperature;
-  // let moistureTD = document.createElement('td');
-  //   moistureTD.innerText = moisture;
-  // let windSpeedTD = document.createElement('td');
-  //   windSpeedTD.innerText = windSpeed;
-  // let rainfallTD = document.createElement('td');
-  //   rainfallTD.innerText = rainfall;
-
-  // tr.append(datetimeTD);
-  // tr.append(temperatureTD);
-  // tr.append(moistureTD);
-  // tr.append(cloudinessTD);
-  // tr.append(windDirectionTD);
-  // tr.append(windSpeedTD);
-  // tr.append(rainfallTD);
-
-  // let emptyDataWrap = document.querySelector('.weather-table tbody .empty-data-wrap');
-
-  // if( emptyDataWrap ) {
-  //   emptyDataWrap.remove();
-  // }
+  originalWeatherData.push(newWeatherData);
   renderWeatherData([newWeatherData]);
 
-  // document.querySelector('.weather-table tbody').append(tr);
   setCookie('weatherData', JSON.stringify(weatherData), 7);
 }
 
 /** Получение данных о погоде с cookie */
 function getWeatherData() {
   let weatherData = getCookie('weatherData');
-  if(weatherData !== null) {
+  if(weatherData) {
     weatherDataInArray = JSON.parse(weatherData);
     return weatherDataInArray;
   }

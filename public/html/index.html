@@ -2,20 +2,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/index.css">
-    <link rel="stylesheet" href="./styles/customInput.css">
-    <link rel="stylesheet" href="./styles/customSelect.css">
-    <link rel="icon" href="./images/weather-icon.png" type="image/png">
-    <script src="./js/index.js" defer></script>
-    <script src="./js/customSelect.js" defer></script>
-    <script src="./js/checkFormData.js" defer></script>
-    <script src="./js/weatherDataSorting.js" defer></script>
-    <script src="./js/weatherDataFiltering.js" defer></script>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/customInput.css">
+    <link rel="stylesheet" href="../styles/customSelect.css">
+    <link rel="icon" href="../images/weather-icon.png" type="image/png">
+    <script src="../js/index.js" defer></script>
+    <script src="../js/customSelect.js" defer></script>
+    <script src="../js/checkFormData.js" defer></script>
+    <script src="../js/weatherDataSorting.js" defer></script>
+    <script src="../js/weatherDataFiltering.js" defer></script>
+    <script src="../js/canvas.js" defer></script>
     <title>Погода</title>
 </head>
 <body>
     <header>
-        <a href="/" class="header__logo"><img src="./images/weather-icon.png" alt="Логотип сайта"></a>
+        <a href="/" class="header__logo"><img src="../images/weather-icon.png" alt="Логотип сайта"></a>
         <span class="header__title">Погода</span>
         <svg class="icon header__add-temperature-data-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
             <path d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216 v216c0,11.046,8.954,20,20,20s20-8.954,20-20V276h216c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z"/>
@@ -301,11 +302,14 @@
                 </tbody>
             </table>
         </div>
-        <!-- <div class="weather-diagram-wrap">
-            <canvas class="weather-diagram">
+        <div class="weather-diagram-wrap">
+            <canvas class="weather-diagram" id="canvas">
 
             </canvas>
-        </div> -->
+        </div>
+        <div class="create-new-file-btn-wrap">
+            <button class="create-new-file-btn">Создать файл с данными погоды</button>
+        </div>
         <div id="layer"></div>
     </main>
 </body>

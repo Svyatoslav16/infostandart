@@ -17,7 +17,7 @@ input:focus {
 }
 
 body {
-    position: relative;
+    /* position: relative; */
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -173,10 +173,10 @@ input[type='number'] {
 }
 
 .weather-diagram-wrap {
-    border: 1px solid black;
-    width: calc(100% - 30px);
-    height: 100%;
-    margin: 0 20px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 15px 5px;
+    box-shadow: 4px 10px 18px -7px rgba(0,0,0,0.75);
 }
 
 .weather-table-wrap {
@@ -221,7 +221,7 @@ input[type='number'] {
 }
 
 .weather-table thead .filtration {
-    position: relative;
+    /* position: relative; */
 }
 
 .filtration__title {
@@ -265,10 +265,10 @@ input[type='number'] {
 
 .filtration__settings { /*В Firefox элемент уходит вверх, нужно менять bottom на top: 50px и left: 0, хз почему*/
     position: absolute;
-    bottom: 10px; 
-    left: 100px;
-    /* top: 50px;
-    left: 0; */
+    /* bottom: 10px; 
+    left: 100px; */
+    top: 200px;
+    left: 90;
     height: 0;
     overflow: hidden;
     background: #fff;
