@@ -60,13 +60,27 @@ document.getElementsByClassName('create-new-file-btn')[0].addEventListener('clic
       'Content-Type': 'application/json'
     }
   }).then(res => {
+    let messageWrap = document.createElement('div');
+        messageWrap.className = 'message-wrap';
+    let message = document.createElement('div');
+        message.className = 'message';
+        
     if(res.ok) {
-      alert('Файл с данными о погоде записан');
+      message.innerText = 'Файл с данными о погоде записан';
+    } else {
+      message.innerText = 'Произошла ошибка при сохранении данных';
     }
+
+    messageWrap.append(message);
+    document.querySelector('body').append(messageWrap);
+
+    setTimeout(() => {
+      document.querySelector('.message-wrap').remove();
+    }, 2000);
   });
 });
 
-function setCookie(name,value,days = 1) {
+function setCookie(name, value, days = 1) {
   let expires = "";
 
   if (days) {
@@ -79,7 +93,7 @@ function setCookie(name,value,days = 1) {
 }
 
 function getCookie(cookie_name) {
-  var results = document.cookie.match ('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
+  let results = document.cookie.match ('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
  
   if (results) {
     return (unescape(results[2]));
@@ -96,7 +110,7 @@ function getCookie(cookie_name) {
  * windSpeed - скорость ветра;
  * rainfall - количество осадков */
 function addWeatherData(datetime, temperature, moisture, cloudiness, windDirection, windSpeed, rainfall) {
-  const newWeatherData = {datetime, temperature, moisture, cloudiness, windDirection, windSpeed, rainfall};
+  const newWeatherData = { datetime, temperature, moisture, cloudiness, windDirection, windSpeed, rainfall };
 
   originalWeatherData.push(newWeatherData);
   renderWeatherData([newWeatherData]);

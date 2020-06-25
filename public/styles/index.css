@@ -17,7 +17,6 @@ input:focus {
 }
 
 body {
-    /* position: relative; */
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -75,10 +74,30 @@ header {
 }
 
 main {
-    /* display: grid; */
+    position: relative;
     background: #f2f2f2;
     padding-top: 20px;
 
+}
+
+.message-wrap {
+    display: grid;
+    justify-content: center;
+    position: fixed;
+    top: 10px;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    z-index: 10;
+}
+
+.message {
+    width: max-content;
+    border-radius: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    background: rgb(71, 168, 206);
+    color: #fff;
 }
 
 /* Убирает стрелки из поля с типом number */
@@ -86,6 +105,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+
 input[type='number'] {
     -moz-appearance: textfield;
 }
@@ -132,13 +152,10 @@ input[type='number'] {
     font-size: 20px;
     color: gray;
     margin-bottom: 10px;
-    /* font-weight: ; */
 }
 
 .weather-form__datetime-wrap {
     width: 100%;
-    /* height: 26px; */
-    /* padding: 15px 23px; */
     margin-bottom: 10px;
     background: #71c2c2;
     border-radius: 8px;
@@ -181,7 +198,6 @@ input[type='number'] {
 
 .weather-table-wrap {
     text-align: left;
-    /* background: #e0e0e0; */
     padding: 5px 0;
     margin: 5px;
     border: 1px solid gray;
@@ -191,6 +207,7 @@ input[type='number'] {
 
 .weather-table {
     border-spacing: 0;
+    position: relative;
 }
 
 .weather-table caption {
@@ -218,10 +235,6 @@ input[type='number'] {
 
 .weather-table tbody .empty-data-wrap:hover {
     background: initial;
-}
-
-.weather-table thead .filtration {
-    /* position: relative; */
 }
 
 .filtration__title {
@@ -263,12 +276,10 @@ input[type='number'] {
     fill: var(--main-color);
 }
 
-.filtration__settings { /*В Firefox элемент уходит вверх, нужно менять bottom на top: 50px и left: 0, хз почему*/
+.filtration__settings {
     position: absolute;
-    /* bottom: 10px; 
-    left: 100px; */
-    top: 200px;
-    left: 90;
+    top: 100px;
+    left: 0;
     height: 0;
     overflow: hidden;
     background: #fff;
@@ -546,13 +557,18 @@ input[type='number'] {
     border-radius: 5px;
 }
 
+.create-new-file-btn-wrap {
+    text-align: center;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: 1px solid gray;
+    box-shadow: 4px 10px 18px -7px rgba(0,0,0,0.75);
+    border-radius: 10px;
+}
+
 @media (min-width: 800px) {
     header {
         grid-template-columns: 50px 1fr 50px;
-    }
-
-    main {
-        min-height: calc(100vh - 80px);
     }
 
     .weather-table {
@@ -560,7 +576,7 @@ input[type='number'] {
     }
 
     .btn {
-        padding: 7px 0;
+        padding: 7px 5px;
     }
 
     .btn:hover {
